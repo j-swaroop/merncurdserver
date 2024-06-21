@@ -38,11 +38,14 @@ router.post('/', async (req, res) => {
 
 router.put('/', async (req, res) => {
     const updateUser = req.body 
-    const {_id, username, password, email, age, account_balance} = updateUser
-    const objectId = new ObjectId(`${_id}`)
-    const result = await usersCollection.updateOne({_id: objectId}, {$set: {password: password, email: email, age: age, account_balance: account_balance}})
+    
+    const { username, password, email, age, account_balance} = updateUser
+    const idd = updateUser._id
+    const objectId = new ObjectId(`${idd}`)
+   
+    const result = await usersCollection.updateOne({_id: objectId}, {$set: {username: username, password: password, email: email, age: age, account_balance: account_balance}})
 
-    return res.send(result)
+    return res.send('Success')
 })
 
 
